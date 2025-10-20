@@ -34,21 +34,22 @@ lab:
     az group create --location eastus2 --name myResourceGroup
     ```
 
-1. 建立一些變數供 CLI 命令使用，這樣可以減少輸入次數。 將 **myLocation** 取代為您先前選擇的值。 APIM 名稱必須是全域唯一的名稱，而下列指令碼會產生隨機字串。 將 **myEmail** 取代為您可以使用的電子郵件地址。
+1. 建立一些變數供 CLI 命令使用，這樣可以減少輸入次數。 以您稍早選擇的值來取代 **<myLocation>**。 APIM 名稱必須是全域唯一的名稱，而下列指令碼會產生隨機字串。 將 **<myEmail>** 取代為您可以存取的電子郵件地址。 以您稍早選擇的值來取代 **<myResourceGroup>**。
 
     ```bash
     myApiName=import-apim-$RANDOM
-    myLocation=myLocation
-    myEmail=myEmail
+    myLocation=<myLocation>
+    myEmail=<myEmail>
+    myResourceGroup=<myResourceGroup>
     ```
 
-1. 建立 APIM 執行個體。 **az apim create** 命令可用來建立執行個體。 將 **myResourceGroup** 取代為先前選擇的值。
+1. 建立 APIM 執行個體。 **az apim create** 命令可用來建立執行個體。 
 
     ```bash
     az apim create -n $myApiName \
         --location $myLocation \
         --publisher-email $myEmail  \
-        --resource-group myResourceGroup \
+        --resource-group $myResourceGroup \
         --publisher-name Import-API-Exercise \
         --sku-name Consumption 
     ```
@@ -75,22 +76,10 @@ lab:
 
     | 設定 | 值 | Description |
     |--|--|--|
-    | **OpenAPI 規格** | `https://bigconference.azurewebsites.net/` | 參考實作 API 的服務，要求會轉送到此位址。 在輸入此值之後，表單中大部分的必要資訊都會自動填入。 |
-    | **URL 配置** | 選取 [HTTPS]****。 | 定義 API 接受的 HTTP 通訊協定安全性層級。 |
+    | **OpenAPI 規格** | `https://petstore3.swagger.io/api/v3/openapi.json` | 參考實作 API 的服務，要求會轉送到此位址。 在輸入此值之後，表單中大部分的必要資訊都會自動填入。 |
+    | **URL 配置** | 確定已選取 **HTTPS**。 | 定義 API 接受的 HTTP 通訊協定安全性層級。 |
 
 1. 選取 **建立**。
-
-## 設定 API 設定
-
-*大型會議 API* 已建立。 現在您可以設定 API 設定。 
-
-1. 選擇功能表中的 [設定]****。
-
-1. 在 [Web 服務 URL]**** 欄位中輸入 `https://bigconference.azurewebsites.net/`。
-
-1. 取消選取 [需要訂閱]**** 核取方塊。
-
-1. 選取**儲存**。
 
 ## 測試 API
 
@@ -98,11 +87,13 @@ lab:
 
 1. 在功能表列中，選取 [測試]****。 這會顯示 API 中所有可用的作業。
 
-1. 搜尋並選取 **Speakers_Get** 作業。 
+1. 進行搜尋，然後選取 [依狀態尋找寵物]****。 事件。 
 
 1. 請選取**傳送**。 您可能需要在頁面上向下捲動才能檢視 HTTP 回應。
 
     後端會回應 **200 OK** 與部分資料。
+
+1. 如果您想要嘗試不同的結果，您可以在 [範本參數] 區段中選取不同的 [狀態]。******** 選取 [值]**** 下的下拉式清單，然後選擇不同的狀態。 接著選取 [傳送] **** 以查看新的結果。
 
 ## 清除資源
 
