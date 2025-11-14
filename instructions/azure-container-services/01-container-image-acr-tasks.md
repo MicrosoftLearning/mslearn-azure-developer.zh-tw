@@ -16,23 +16,23 @@ lab:
 * 驗證結果
 * 在 Azure Container Registry 中執行映像
 
-本練習大約需要 **20** 分鐘才能完成。
+本練習大約需要**20** 分鐘才能完成。
 
 ## 建立 Azure Container Registry 資源
 
-1. 在網頁瀏覽器中，瀏覽至 Azure 入口網站 [https://portal.azure.com](https://portal.azure.com)；若出現提示，請使用您的 Azure 認證登入。
+1. 在網頁瀏覽器中，瀏覽至 Azure 入口網站[https://portal.azure.com](https://portal.azure.com)；若出現提示，請使用您的 Azure 認證登入。
 
-1. 使用頁面上方搜尋欄右側的 **[\>_]** 按鈕，就能從 Azure 入口網站建立新的 Cloud Shell，並選取 ***Bash*** 環境。 Cloud Shell 會在 Azure 入口網站底部的窗格顯示命令列介面。 如果系統提示您選取儲存體帳戶以保存檔案，請選取 [不需要儲存體帳戶]****、[您的訂用帳戶]，然後選取 [套用]****。
+1. 使用頁面上方搜尋欄右側的 **[\>_]** 按鈕，就能從 Azure 入口網站建立新的 Cloud Shell，並選取***Bash*** 環境。 Cloud Shell 會在 Azure 入口網站底部的窗格顯示命令列介面。 如果系統提示您選取儲存體帳戶以保存檔案，請選取 [不需要儲存體帳戶]****、[您的訂用帳戶]，然後選取 [套用]****。
 
-    > **備註**：如果您之前就已建立使用 *Bash* 環境的 Cloud Shell，請將原先的設定切換成 ***PowerShell***。
+    > **備註**：如果您之前就已建立使用*Bash* 環境的 Cloud Shell，請將原先的設定切換成***PowerShell***。
 
-1. 針對本練習所需的資源建立資源群組。 將 **myResourceGroup** 取代為您想要用於資源群組的名稱。 如有必要，您可以使用附近的地區來取代 **eastus**。 如果您已有想要使用的資源群組，請繼續進行下一個步驟。
+1. 針對本練習所需的資源建立資源群組。 將**myResourceGroup** 取代為您想要用於資源群組的名稱。 如有必要，您可以使用附近的地區來取代**eastus**。 如果您已有想要使用的資源群組，請繼續進行下一個步驟。
 
     ```
     az group create --location eastus --name myResourceGroup
     ```
 
-1. 執行下列命令以建立基本容器登錄。 登錄名稱在 Azure 內必須是唯一的，且包含 5-50 個英數字元。 將 **myResourceGroup** 取代為您先前使用的名稱，並將 **myContainerRegistry** 取代為唯一值。
+1. 執行下列命令以建立基本容器登錄。 登錄名稱在 Azure 內必須是唯一的，且包含 5-50 個數字與小寫字元。 將**myResourceGroup** 取代為您先前使用的名稱，並將**myContainerRegistry** 取代為唯一值。
 
     ```bash
     az acr create --resource-group myResourceGroup \
@@ -45,13 +45,13 @@ lab:
 
 接下來，您將根據 Dockerfile 建置和推送映像。
 
-1. 執行下列命令以建立 Dockerfile。 Dockerfile 會包含單行，參考裝載於 Microsoft Container Registry 的 *hello-world* 映像。
+1. 執行下列命令以建立 Dockerfile。 Dockerfile 會包含單行，參考裝載於 Microsoft Container Registry 的*hello-world* 映像。
 
     ```bash
     echo FROM mcr.microsoft.com/hello-world > Dockerfile
     ```
 
-1. 執行下列 **az acr build** 命令來建置映射，並在成功建置映像後，將其推送至您的登錄。 以您先前建立的名稱取代 **myContainerRegistry**。
+1. 執行下列**az acr build** 命令來建置映射，並在成功建置映像後，將其推送至您的登錄。 以您先前建立的名稱取代**myContainerRegistry**。
 
     ```bash
     az acr build --image sample/hello-world:v1  \
@@ -59,7 +59,7 @@ lab:
         --file Dockerfile .
     ```
 
-    以下是上一個命令輸出的簡短範例，其中顯示最後幾行與最終結果。 您可以在 [存放庫]** 欄位中看到 *sample/hello-word* 映像已列出。
+    以下是上一個命令輸出的簡短範例，其中顯示最後幾行與最終結果。 您可以在 [存放庫]** 欄位中看到*sample/hello-word* 映像已列出。
 
     ```
     - image:
@@ -80,7 +80,7 @@ lab:
 
 ## 驗證結果
 
-1. 執行下列命令，列出登錄中的存放庫。 以您先前建立的名稱取代 **myContainerRegistry**。
+1. 執行下列命令，列出登錄中的存放庫。 以您先前建立的名稱取代**myContainerRegistry**。
 
     ```bash
     az acr repository list --name myContainerRegistry --output table
@@ -94,7 +94,7 @@ lab:
     sample/hello-world
     ```
 
-1. 執行下列命令，列出 **sample/hello-world** 存放庫上的標籤。 以您先前使用的名稱取代 **myContainerRegistry**。
+1. 執行下列命令，列出**sample/hello-world** 存放庫上的標籤。 以您先前使用的名稱取代**myContainerRegistry**。
 
     ```bash
     az acr repository show-tags --name myContainerRegistry \
@@ -111,14 +111,14 @@ lab:
 
 ## 在 ACR 中執行映像
 
-1. 使用 **az acr run** 命令，從容器登錄執行 *sample/hello-world:v1* 容器映像。 下列範例會使用 **$Registry**，指定要在其中執行命令的登錄。 以您先前使用的名稱取代 **myContainerRegistry**。
+1. 使用**az acr run** 命令，從容器登錄執行*sample/hello-world:v1* 容器映像。 下列範例會使用 **$Registry**，指定要在其中執行命令的登錄。 以您先前使用的名稱取代**myContainerRegistry**。
 
     ```bash
     az acr run --registry myContainerRegistry \
         --cmd '$Registry/sample/hello-world:v1' /dev/null
     ```
 
-    在此範例中的 **cmd** 參數會執行其預設設定中的容器，但 **cmd** 支援其他 **docker run** 參數，甚至是其他 **docker** 命令。 
+    在此範例中的**cmd** 參數會執行其預設設定中的容器，但**cmd** 支援其他**docker run** 參數，甚至是其他**docker** 命令。 
 
     以下為縮點後的輸出範例：
 
@@ -151,7 +151,7 @@ lab:
 
 現在您已完成練習，您應該刪除建立的雲端資源，以避免不必要的資源使用狀況。
 
-1. 在網頁瀏覽器中，瀏覽至 Azure 入口網站 [https://portal.azure.com](https://portal.azure.com)；若出現提示，請使用您的 Azure 認證登入。
+1. 在網頁瀏覽器中，瀏覽至 Azure 入口網站[https://portal.azure.com](https://portal.azure.com)；若出現提示，請使用您的 Azure 認證登入。
 1. 瀏覽至您建立的資源群組，並檢視此練習中所使用的資源內容。
 1. 在工具列上，選取 [刪除資源群組]****。
 1. 輸入資源群組名稱並確認您想要將其刪除。
